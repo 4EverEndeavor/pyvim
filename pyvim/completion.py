@@ -1,6 +1,8 @@
 from __future__ import unicode_literals
 from prompt_toolkit.completion import Completer, Completion
 
+from .java.completion import JavaCompleter
+
 import re
 import weakref
 
@@ -45,8 +47,11 @@ class DocumentCompleter(Completer):
         location = self._editor_buffer_ref().location or '.txt'
 
         # Select completer.
-        if location.endswith('.py') and editor.enable_jedi:
+        if(location.endswith('.py') and editor.enable_jedi \
+            or location == '.pyvimrc'):
             completer = _PythonCompleter(location)
+        elif location.endswith('java'):
+            completer = JavaCompleter(location)
         else:
             completer = DocumentWordsCompleter()
 
@@ -65,7 +70,9 @@ class _PythonCompleter(Completer):
         script = self._get_jedi_script_from_document(document)
         if script:
             try:
-                completions = script.completions()
+                completions = script.complete(
+                    column=document.cursor_position_col,
+                    line=document.cursor_position_row + 1)
             except TypeError:
                 # Issue #9: bad syntax causes completions() to fail in jedi.
                 # https://github.com/jonathanslenders/python-prompt-toolkit/issues/9
@@ -100,8 +107,6 @@ class _PythonCompleter(Completer):
         try:
             return jedi.Script(
                 document.text,
-                column=document.cursor_position_col,
-                line=document.cursor_position_row + 1,
                 path=self.location)
         except ValueError:
             # Invalid cursor position.

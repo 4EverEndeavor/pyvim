@@ -1,0 +1,8 @@
+navigation
+autocomplete java
+autocomplete python
+debugger
+file search
+run tests
+build
+

@@ -22,6 +22,7 @@ setup(
         'pyflakes',        # For Python error reporting.
         'pygments',        # For the syntax highlighting.
         'docopt',          # For command line arguments.
+        'jedi',            # For autocompletion
     ],
     entry_points={
         'console_scripts': [

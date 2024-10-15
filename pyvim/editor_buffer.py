@@ -11,6 +11,7 @@ from six import string_types
 
 import os
 import weakref
+import logging
 
 PTK3 = ptk_version.startswith('3.')
 
@@ -23,6 +24,7 @@ __all__ = (
     'EditorBuffer',
 )
 
+logger = logging.getLogger(__name__)
 
 class EditorBuffer(object):
     """
@@ -173,6 +175,7 @@ class EditorBuffer(object):
 
     def run_reporter(self):
         " Buffer text changed. "
+        logger.debug("Running error reporter")
         if not self._reporter_is_running:
             self._reporter_is_running = True
 

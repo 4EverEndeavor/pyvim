@@ -13,6 +13,7 @@ Options:
 from __future__ import unicode_literals
 import docopt
 import os
+import logging
 
 from pyvim.editor import Editor
 from pyvim.rc_file import run_rc_file
@@ -21,6 +22,7 @@ __all__ = (
     'run',
 )
 
+logger = logging.getLogger(__name__)
 
 def run():
     a = docopt.docopt(__doc__)
@@ -30,7 +32,10 @@ def run():
     vsplit = a['-O']
     pyvimrc = a['-u']
 
+    logging.basicConfig(filename='myapp.log', level=logging.DEBUG)
+
     # Create new editor instance.
+    logger.info('Creating editor instance for locations: {}'.format(locations))
     editor = Editor()
 
     # Apply rc file.

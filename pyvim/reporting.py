@@ -13,11 +13,13 @@ from __future__ import unicode_literals
 import pyflakes.api
 import string
 import six
+import logging
 
 __all__ = (
     'report',
 )
 
+logger = logging.getLogger(__name__)
 
 class ReporterError(object):
     """
@@ -37,11 +39,14 @@ def report(location, document):
 
     Returns a list of `ReporterError`.
     """
+    logger.debug("Creating new error report for file: {}".format(location))
     assert isinstance(location, six.string_types)
 
     if location.endswith('.py'):
+        logger.debug("location ends with .py")
         return report_pyflakes(document)
     else:
+        logger.debug("Some other kind of location")
         return []
 
 
@@ -76,6 +81,7 @@ def report_pyflakes(document):
                              formatted_text=format_flake_message(message))
 
     # Construct list of ReporterError instances.
+    logger.debug('found the following errors: {}'.format(reporter.messages))
     return [message_to_reporter_error(m) for m in reporter.messages]
 
 
