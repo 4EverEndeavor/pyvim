@@ -27,11 +27,14 @@ from functools import partial
 
 import re
 import sys
+import logging
 
 __all__ = (
     'EditorLayout',
     'get_terminal_title',
 )
+
+logger = logging.getLogger(__name__)
 
 def _try_char(character, backup, encoding=sys.stdout.encoding):
     """
@@ -630,12 +633,16 @@ class ReportingProcessor(Processor):
     """
     def __init__(self, editor_buffer):
         self.editor_buffer = editor_buffer
+        logger.debug("Creating new error report processor")
 
     def apply_transformation(self, transformation_input): 
+        # logger.debug("Applying transformations")
         fragments = transformation_input.fragments
 
+        # logger.debug("Report errors? {}".format(self.editor_buffer.report_errors))
         if self.editor_buffer.report_errors:
             for error in self.editor_buffer.report_errors:
+                # logger.debug("Error: {}".format(error))
                 if error.lineno == transformation_input.lineno:
                     fragments = explode_text_fragments(fragments)
                     for i in range(error.start_column, error.end_column):
