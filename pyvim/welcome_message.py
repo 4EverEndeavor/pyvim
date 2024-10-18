@@ -2,14 +2,13 @@
 The welcome message. This is displayed when the editor opens without any files.
 """
 from __future__ import unicode_literals
-from prompt_toolkit.formatted_text.utils import fragment_list_len
+from .toolkit.formatted_text.utils import fragment_list_len
 
-import prompt_toolkit
 import pyvim
 import platform
 import sys
 version = sys.version_info
-pyvim_version = pyvim.__version__
+pyvim_version = 'Eric\'s Custom Version'
 
 __all__ = (
     'WELCOME_MESSAGE_TOKENS',
@@ -24,7 +23,6 @@ WELCOME_MESSAGE_TOKENS = [
     ('class:title', 'PyVim - Pure Python Vi clone\n'),
     ('', 'Still experimental\n\n'),
     ('', 'version '), ('class:version', pyvim_version),
-        ('', ', prompt_toolkit '), ('class:version', prompt_toolkit.__version__),
     ('', '\n'),
     ('', 'by Jonathan Slenders\n\n'),
     ('', 'type :q'),

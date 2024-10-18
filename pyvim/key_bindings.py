@@ -1,8 +1,8 @@
 from __future__ import unicode_literals
 
-from prompt_toolkit.application import get_app
-from prompt_toolkit.filters import Condition, has_focus, vi_insert_mode, vi_navigation_mode
-from prompt_toolkit.key_binding import KeyBindings
+from .toolkit.application import get_app
+from .toolkit.filters import Condition, has_focus, vi_insert_mode, vi_navigation_mode
+from .toolkit.key_binding import KeyBindings
 
 import os
 
@@ -107,7 +107,7 @@ def create_key_bindings(editor):
     @kb.add('c-w', 'c-w', filter=in_navigation_mode)
     def focus_next_window(event):
         editor.window_arrangement.cycle_focus()
-        editor.sync_with_prompt_toolkit()
+        editor.sync_with_toolkit()
 
     @kb.add('c-w', 'n', filter=in_navigation_mode)
     def horizontal_split(event):
@@ -115,7 +115,7 @@ def create_key_bindings(editor):
         Split horizontally.
         """
         editor.window_arrangement.hsplit(None)
-        editor.sync_with_prompt_toolkit()
+        editor.sync_with_toolkit()
 
     @kb.add('c-w', 'v', filter=in_navigation_mode)
     def vertical_split(event):
@@ -123,17 +123,17 @@ def create_key_bindings(editor):
         Split vertically.
         """
         editor.window_arrangement.vsplit(None)
-        editor.sync_with_prompt_toolkit()
+        editor.sync_with_toolkit()
 
     @kb.add('g', 't', filter=in_navigation_mode)
     def focus_next_tab(event):
         editor.window_arrangement.go_to_next_tab()
-        editor.sync_with_prompt_toolkit()
+        editor.sync_with_toolkit()
 
     @kb.add('g', 'T', filter=in_navigation_mode)
     def focus_previous_tab(event):
         editor.window_arrangement.go_to_previous_tab()
-        editor.sync_with_prompt_toolkit()
+        editor.sync_with_toolkit()
 
     @kb.add('f1')
     def show_help(event):
@@ -155,7 +155,7 @@ def create_key_bindings(editor):
 
         editor.window_arrangement.open_buffer(
             new_path, show_in_current_window=True)
-        editor.sync_with_prompt_toolkit()
+        editor.sync_with_toolkit()
 
     @kb.add('-', filter=in_file_explorer_mode)
     def to_parent_directory(event):
@@ -164,7 +164,7 @@ def create_key_bindings(editor):
 
         editor.window_arrangement.open_buffer(
             new_path, show_in_current_window=True)
-        editor.sync_with_prompt_toolkit()
+        editor.sync_with_toolkit()
 
     return kb
 

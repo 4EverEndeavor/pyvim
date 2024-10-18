@@ -49,6 +49,7 @@ def run_rc_file(editor, rc_file):
         # Now we should have a 'configure' method in this namespace. We call this
         # method with editor as an argument.
         if 'configure' in namespace:
+            breakpoint()
             namespace['configure'](editor)
 
     except Exception as e:

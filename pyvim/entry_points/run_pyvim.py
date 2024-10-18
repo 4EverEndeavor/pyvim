@@ -15,8 +15,8 @@ import docopt
 import os
 import logging
 
-from pyvim.editor import Editor
-from pyvim.rc_file import run_rc_file
+from ..editor import Editor
+from ..rc_file import run_rc_file
 
 __all__ = (
     'run',
@@ -24,7 +24,9 @@ __all__ = (
 
 logger = logging.getLogger(__name__)
 
+
 def run():
+    breakpoint()
     a = docopt.docopt(__doc__)
     locations = a['<location>']
     in_tab_pages = a['-p']

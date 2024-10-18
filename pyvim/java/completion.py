@@ -2,8 +2,8 @@ import weakref
 import os
 import re
 
-from prompt_toolkit.completion import Completion, Completer
-from prompt_toolkit.document import Document
+from ..completion import Completion, Completer
+from ..toolkit.document import Document
 from . import java_bones
 from .context import CompletionContext, Matchers
 

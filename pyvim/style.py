@@ -2,8 +2,8 @@
 The styles, for the colorschemes.
 """
 from __future__ import unicode_literals
-from prompt_toolkit.styles import Style, merge_styles
-from prompt_toolkit.styles.pygments import style_from_pygments_cls
+from .toolkit.styles import Style, merge_styles
+from .toolkit.styles.pygments import style_from_pygments_cls
 
 from pygments.styles import get_all_styles, get_style_by_name
 

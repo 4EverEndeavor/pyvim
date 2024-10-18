@@ -2,21 +2,21 @@
 The actual layout for the renderer.
 """
 from __future__ import unicode_literals
-from prompt_toolkit.application.current import get_app
-from prompt_toolkit.filters import has_focus, is_searching, Condition, has_arg
-from prompt_toolkit.key_binding.vi_state import InputMode
-from prompt_toolkit.layout import HSplit, VSplit, FloatContainer, Float, Layout
-from prompt_toolkit.layout.containers import Window, ConditionalContainer, ColorColumn, WindowAlign, ScrollOffsets
-from prompt_toolkit.layout.controls import BufferControl
-from prompt_toolkit.layout.controls import FormattedTextControl
-from prompt_toolkit.layout.dimension import Dimension
-from prompt_toolkit.layout.margins import ConditionalMargin, NumberedMargin
-from prompt_toolkit.layout.menus import CompletionsMenu
-from prompt_toolkit.layout.processors import Processor, ConditionalProcessor, BeforeInput, ShowTrailingWhiteSpaceProcessor, Transformation, HighlightSelectionProcessor, HighlightSearchProcessor, HighlightIncrementalSearchProcessor, HighlightMatchingBracketProcessor, TabsProcessor, DisplayMultipleCursors
-from prompt_toolkit.layout.utils import explode_text_fragments
-from prompt_toolkit.mouse_events import MouseEventType
-from prompt_toolkit.selection import SelectionType
-from prompt_toolkit.widgets.toolbars import FormattedTextToolbar, SystemToolbar, SearchToolbar, ValidationToolbar, CompletionsToolbar
+from .toolkit.application.current import get_app
+from .toolkit.filters import has_focus, is_searching, Condition, has_arg
+from .toolkit.key_binding.vi_state import InputMode
+from .toolkit.layout import HSplit, VSplit, FloatContainer, Float, Layout
+from .toolkit.layout.containers import Window, ConditionalContainer, ColorColumn, WindowAlign, ScrollOffsets
+from .toolkit.layout.controls import BufferControl
+from .toolkit.layout.controls import FormattedTextControl
+from .toolkit.layout.dimension import Dimension
+from .toolkit.layout.margins import ConditionalMargin, NumberedMargin
+from .toolkit.layout.menus import CompletionsMenu
+from .toolkit.layout.processors import Processor, ConditionalProcessor, BeforeInput, ShowTrailingWhiteSpaceProcessor, Transformation, HighlightSelectionProcessor, HighlightSearchProcessor, HighlightIncrementalSearchProcessor, HighlightMatchingBracketProcessor, TabsProcessor, DisplayMultipleCursors
+from .toolkit.layout.utils import explode_text_fragments
+from .toolkit.mouse_events import MouseEventType
+from .toolkit.selection import SelectionType
+from .toolkit.widgets.toolbars import FormattedTextToolbar, SystemToolbar, SearchToolbar, ValidationToolbar, CompletionsToolbar
 
 from .commands.lexer import create_command_lexer
 from .lexer import DocumentLexer
@@ -64,7 +64,7 @@ class TabsControl(FormattedTextControl):
             def handler(app, mouse_event):
                 if mouse_event.event_type == MouseEventType.MOUSE_DOWN:
                     editor.window_arrangement.active_tab_index = index
-                    editor.sync_with_prompt_toolkit()
+                    editor.sync_with_toolkit()
                 else:
                     return NotImplemented
             return handler

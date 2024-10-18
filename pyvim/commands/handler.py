@@ -52,7 +52,7 @@ def handle_command(editor, input_string):
 
     # After execution of commands, make sure to update the layout and focus
     # stack.
-    editor.sync_with_prompt_toolkit()
+    editor.sync_with_toolkit()
 
 
 def _go_to_line(editor, line):

@@ -9,13 +9,13 @@ Usage::
 """
 from __future__ import unicode_literals
 
-from prompt_toolkit.application import Application
-from prompt_toolkit.buffer import Buffer
-from prompt_toolkit.enums import EditingMode
-from prompt_toolkit.filters import Condition
-from prompt_toolkit.history import FileHistory
-from prompt_toolkit.key_binding.vi_state import InputMode
-from prompt_toolkit.styles import DynamicStyle
+from .toolkit.application import Application
+from .toolkit.buffer import Buffer
+from .toolkit.enums import EditingMode
+from .toolkit.filters import Condition
+from .toolkit.history import FileHistory
+from .toolkit.key_binding.vi_state import InputMode
+from .toolkit.styles import DynamicStyle
 
 from .commands.completer import create_command_completer
 from .commands.handler import handle_command
@@ -40,8 +40,8 @@ class Editor(object):
     The main class. Containing the whole editor.
 
     :param config_directory: Place where configuration is stored.
-    :param input: (Optionally) `prompt_toolkit.input.Input` object.
-    :param output: (Optionally) `prompt_toolkit.output.Output` object.
+    :param input: (Optionally) `toolkit.input.Input` object.
+    :param output: (Optionally) `toolkit.output.Output` object.
     """
     def __init__(self, config_directory='~/.pyvim', input=None, output=None):
         self.input = input
@@ -225,7 +225,7 @@ class Editor(object):
         except pygments.util.ClassNotFound:
             pass
 
-    def sync_with_prompt_toolkit(self):
+    def sync_with_toolkit(self):
         """
         Update the prompt-toolkit Layout and FocusStack.
         """
@@ -244,7 +244,7 @@ class Editor(object):
         Show help in new window.
         """
         self.window_arrangement.hsplit(text=HELP_TEXT)
-        self.sync_with_prompt_toolkit()  # Show new window.
+        self.sync_with_toolkit()  # Show new window.
 
     def run(self):
         """
@@ -252,13 +252,13 @@ class Editor(object):
         This starts the interaction.
         """
         # Make sure everything is in sync, before starting.
-        self.sync_with_prompt_toolkit()
+        self.sync_with_toolkit()
 
         def pre_run():
             # Start in navigation mode.
             self.application.vi_state.input_mode = InputMode.NAVIGATION
 
-        # Run eventloop of prompt_toolkit.
+        # Run eventloop of toolkit.
         self.application.run(pre_run=pre_run)
 
     def enter_command_mode(self):

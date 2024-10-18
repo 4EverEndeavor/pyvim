@@ -1,9 +1,9 @@
 from __future__ import unicode_literals
 
-from prompt_toolkit.completion import Completer, Completion
-from prompt_toolkit.completion import WordCompleter, PathCompleter
-from prompt_toolkit.contrib.completers.system import SystemCompleter
-from prompt_toolkit.contrib.regular_languages.completion import GrammarCompleter
+from ..completion import Completer, Completion
+from ..toolkit.completion import WordCompleter, PathCompleter
+from ..toolkit.contrib.completers.system import SystemCompleter
+from ..toolkit.contrib.regular_languages.completion import GrammarCompleter
 
 from .grammar import COMMAND_GRAMMAR
 from .commands import get_commands, SET_COMMANDS

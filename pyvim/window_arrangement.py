@@ -18,7 +18,7 @@ __all__ = (
 
 class HSplit(list):
     """ Horizontal split. (This is a higher level split than
-    prompt_toolkit.layout.HSplit.) """
+    toolkit.layout.HSplit.) """
 
 
 class VSplit(list):
@@ -33,7 +33,7 @@ class Window(object):
         assert isinstance(editor_buffer, EditorBuffer)
         self.editor_buffer = editor_buffer
 
-        # The prompt_toolkit layout Window.
+        # The toolkit layout Window.
         self.pt_window = None
 
     def __repr__(self):
@@ -236,7 +236,7 @@ class WindowArrangement(object):
 
     @property
     def active_pt_window(self):
-        " The active prompt_toolkit layout Window. "
+        " The active toolkit layout Window. "
         if self.active_tab:
             w = self.active_tab.active_window
             if w:

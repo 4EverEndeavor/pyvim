@@ -1,6 +1,6 @@
 from __future__ import unicode_literals
 
-from prompt_toolkit.contrib.regular_languages.compiler import compile
+from ..toolkit.contrib.regular_languages.compiler import compile
 
 from .commands import get_commands_taking_locations
 

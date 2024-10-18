@@ -1,6 +1,6 @@
 from __future__ import unicode_literals, print_function
-from prompt_toolkit.application import run_in_terminal
-from prompt_toolkit.document import Document
+from ..toolkit.application import run_in_terminal
+from ..toolkit.document import Document
 
 import os
 import re
@@ -339,7 +339,7 @@ def quit_nonzero(editor):
     """
     Quit with non zero exit status.
     """
-    # Note: the try/finally in `prompt_toolkit.Interface.read_input`
+    # Note: the try/finally in `toolkit.Interface.read_input`
     # will ensure that the render output is reset, leaving the alternate
     # screen before quitting.
     editor.application.exit()
