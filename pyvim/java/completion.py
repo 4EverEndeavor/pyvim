@@ -7,6 +7,8 @@ from ..toolkit.document import Document
 from . import java_bones
 from .context import CompletionContext, Matchers
 
+from .java_bones import keywords, primitiveTypes
+
 class JavaCompleter(Completer):
     '''
     Completion for java files
@@ -84,7 +86,8 @@ class JavaCompleter(Completer):
 
 
     def get_first_words(self):
-        return java_bones.keywords + java_bones.primitiveTypes
+        breakpoint()
+        return keywords + primitiveTypes
 
 
     def get_first_words_lower(self):

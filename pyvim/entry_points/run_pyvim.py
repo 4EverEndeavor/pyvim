@@ -2,13 +2,13 @@
 """
 pyvim: Pure Python Vim clone.
 Usage:
-    pyvim [-p] [-o] [-O] [-u <pyvimrc>] [<location>...]
+    pyvim [-p] [-o] [-O] [-u <alternate_pyvimrc_file>] [<location>...]
 
 Options:
     -p           : Open files in tab pages.
     -o           : Split horizontally.
     -O           : Split vertically.
-    -u <pyvimrc> : Use this .pyvimrc file instead.
+    -u <alternate_pyvimrc_file> : Use this .alternate_pyvimrc_file file instead.
 """
 from __future__ import unicode_literals
 import docopt
@@ -17,6 +17,7 @@ import logging
 
 from ..editor import Editor
 from ..rc_file import run_rc_file
+from .. import pyvimrc
 
 __all__ = (
     'run',
@@ -32,7 +33,7 @@ def run():
     in_tab_pages = a['-p']
     hsplit = a['-o']
     vsplit = a['-O']
-    pyvimrc = a['-u']
+    alternate_pyvimrc_file = a['-u']
 
     logging.basicConfig(filename='myapp.log', level=logging.DEBUG)
 
@@ -41,13 +42,14 @@ def run():
     editor = Editor()
 
     # Apply rc file.
-    if pyvimrc:
-        run_rc_file(editor, pyvimrc)
+    if alternate_pyvimrc_file:
+        run_rc_file(editor, alternate_pyvimrc_file)
     else:
-        default_pyvimrc = os.path.expanduser('~/.pyvimrc')
-
-        if os.path.exists(default_pyvimrc):
-            run_rc_file(editor, default_pyvimrc)
+        # default_pyvimrc = os.path.expanduser('~/.pyvimrc')
+        # default_pyvimrc = os.path.expanduser('~/.pyvimrc')
+        # if os.path.exists(default_pyvimrc):
+        # run_rc_file(editor, default_pyvimrc)
+        pyvimrc.configure(editor)
 
     # Load files and run.
     editor.load_initial_files(locations, in_tab_pages=in_tab_pages,

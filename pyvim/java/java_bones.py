@@ -5,10 +5,12 @@ from subprocess import CompletedProcess
 from difflib import SequenceMatcher as SM
 
 
+keywords = ['public', 'private', 'protected', 'final', 'import']
+primitiveTypes = ['boolean', 'int', 'byte', 'short', 'long', 'float', 'double', 'char']
+
+
 class JavapMatchers:
     def __init__(self):
-        self.keywords = ['public', 'private', 'protected', 'final', 'import']
-        self.primitiveTypes = ['boolean', 'int', 'byte', 'short', 'long', 'float', 'double', 'char']
         self.primitiveTypePattern = '|'.join(primitiveTypes)
         self.accessModMatcher = '(?P<access_modifier>public|private|protected)'
         self.objectType = '(?P<object_type>class|enum|interface)'
@@ -20,7 +22,7 @@ class JavapMatchers:
         self.exception = '(?P<exception>throws\s+(?P<exception_class>.*Exception))'
         self.compiledFrom = 'Compiled from (?P<source_name>[A-Z][A-Za-z]+\.java'
         self.signatureMatcher = self.accessModMatcher + '\s*' + self.objectType + '\s*' + self.fullyQualified + ' \{'
-        self.methodMatcher = accessModMatcher + '\s*' + modifier + '\s*' \
+        self.methodMatcher = self.accessModMatcher + '\s*' + self.modifier + '\s*' \
             + '(?P<return_type>' + self.fullyQualified + ')' + '\s*' \
             + self.methodName + self.parameters + '\)\s*' + self.exception
         self.fieldMatcher = self.accessModMatcher + '\s*' + self.modifier + '\s*' \
@@ -89,6 +91,7 @@ def parse_javap_output(completed: CompletedProcess, className: str):
     constructors = []
     methods = []
     fields = []
+    breakpoint()
     mchs = JavapMatchers()
     for line in lines[2:-2]:
         methodMatch = re.compile(mchs.methodMatcher).fullmatch(line)
